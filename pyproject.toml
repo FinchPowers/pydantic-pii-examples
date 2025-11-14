@@ -1,0 +1,62 @@
+[project]
+name = "demo"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Francois-Michel L'Heureux"}
+]
+readme = "README.md"
+requires-python = ">=3.13,<4"
+dependencies = [
+    "fastapi (>=0.121.0,<0.122.0)",
+    "uvicorn (>=0.38.0,<0.39.0)",
+    "ruff (>=0.14.4,<0.15.0)",
+    "mypy (>=1.18.2,<2.0.0)",
+    "pydantic[email] (>=2.12.4,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+# See https://beta.ruff.rs/docs/rules/
+select = ["B", "D", "E", "F", "I", "W", "N", "YTT", "ASYNC", "S", "A", "C4", "DTZ", "T10", "PIE", "PT", "RSE", "SLF", "SIM", "TCH", "PTH", "PGH", "PLC", "RUF", "RET", "UP", "ISC", "LOG", "PYI", "Q", "SLOT", "TRY004", "TRY300", "PERF"]
+# RUF001 can fix false positives like "L'individu" -> "Lindividu" (French word)
+ignore = ["D1", "D401", "D413", "PTH123", "RUF001"]
+unfixable = ["F401", "F841", "PIE804"]
+pydocstyle = {convention = "google"}
+
+[tool.mypy]
+python_version = "3.13"
+namespace_packages = true
+ignore_missing_imports = false
+check_untyped_defs = true
+no_implicit_optional = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+warn_return_any = true
+warn_unreachable = true
+show_error_codes = true
+explicit_package_bases = true
+plugins = [
+  "pydantic.mypy"
+]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = false
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
